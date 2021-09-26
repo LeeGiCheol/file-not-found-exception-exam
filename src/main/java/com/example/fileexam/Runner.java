@@ -24,28 +24,25 @@ public class Runner implements ApplicationRunner {
     public void fileCallSuccess() throws IOException {
         Resource resource = new ClassPathResource(this.NUMBER_PATH);
         InputStream is = resource.getInputStream();
+
         Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8);
         BufferedReader br = new BufferedReader(reader);
 
-        String line;
-        int sum = 0;
-
-        while ((line = br.readLine()) != null) {
-            sum += Integer.parseInt(line);
-        }
-
-        System.out.println(sum);
+        inputStreamRead(br);
     }
 
     public void fileCallFail() throws IOException {
         Resource resource = new ClassPathResource(this.NUMBER_PATH);
         String path = resource.getFile().getAbsolutePath();
-
         FileInputStream fis = new FileInputStream(path);
 
         Reader reader = new InputStreamReader(fis, StandardCharsets.UTF_8);
         BufferedReader br = new BufferedReader(reader);
 
+        inputStreamRead(br);
+    }
+
+    private void inputStreamRead(BufferedReader br) throws IOException {
         String line;
         int sum = 0;
 
